@@ -231,6 +231,21 @@ impl PinataApi {
     self.parse_result(response).await
   }
 
+  /// Pin bytes to Pinata's IPFS nodes.
+  pub async fn pin_bytes(&self, name: &str, bytes: Vec<u8>) -> Result<PinnedObject, ApiError> {
+    let mut form = Form::new();
+
+    let part = Part::bytes(bytes);
+    form = form.part("file", part.file_name(String::from(name)));
+    
+    let response = self.client.post(&api_url("/pinning/pinFileToIPFS"))
+      .multipart(form)
+      .send()
+      .await?;
+
+    self.parse_result(response).await
+  }
+
   /// Unpin content previously uploaded to the Pinata's IPFS nodes.
   pub async fn unpin(&self, hash: &str) -> Result<(), ApiError> {
     let response = self.client.delete(&api_url(&format!("/pinning/unpin/{}", hash)))
