@@ -1,9 +1,9 @@
-use crate::errors::{ApiError, Error};
+use crate::errors::ApiError;
 
 static BASE_URL: &'static str = "https://api.pinata.cloud";
 
 /// Checks to ensure keys are not empty
-pub(crate) fn validate_keys(api_key: &str, secret_api_key: &str) -> Result<(), Error> {
+pub(crate) fn validate_keys(api_key: &str, secret_api_key: &str) -> Result<(), ApiError> {
   if api_key.is_empty() {
     Err(ApiError::InvalidApiKey())?
   }

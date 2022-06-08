@@ -80,7 +80,6 @@ use reqwest::{Client, ClientBuilder, header::HeaderMap, multipart::{Form, Part},
 use walkdir::WalkDir;
 use serde::{Serialize};
 use serde::de::DeserializeOwned;
-use errors::Error;
 use utils::api_url;
 use api::internal::*;
 
@@ -100,7 +99,7 @@ pub struct PinataApi {
 impl PinataApi {
   /// Creates a new instance of PinataApi using the provided keys.
   /// This function panics if api_key or secret_api_key's are empty/blank
-  pub fn new<S: Into<String>>(api_key: S, secret_api_key: S) -> Result<PinataApi, Error> {
+  pub fn new<S: Into<String>>(api_key: S, secret_api_key: S) -> Result<PinataApi, ApiError> {
     let owned_key = api_key.into();
     let owned_secret = secret_api_key.into();
 

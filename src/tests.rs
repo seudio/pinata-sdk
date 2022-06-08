@@ -2,13 +2,18 @@ use super::*;
 use insta::assert_debug_snapshot;
 use serde::Serialize;
 use std::collections::HashMap;
-use std::io::Read;
-use std::io::BufReader;
 use std::fs::File;
+use std::io::BufReader;
+use std::io::Read;
 
 fn get_api() -> PinataApi {
-    let api_key = std::env::var("API_KEY").expect("API_KEY env required to run test");
-    let secret_api_key = std::env::var("SECRET_API_KEY").expect("SECRET_API_KEY env required to run test");
+    //let api_key = std::env::var("API_KEY").expect("API_KEY env required to run test");
+    //let secret_api_key =
+    //    std::env::var("SECRET_API_KEY").expect("SECRET_API_KEY env required to run test");
+
+    let api_key = "5be01ff0d3fa80f8aa70".to_string();
+    let secret_api_key =
+        "c2b5f2cedac03dad834781ae9f8679ba6ec6983034ce959405e70d580325a843".to_string();
     super::PinataApi::new(api_key, secret_api_key).unwrap()
 }
 
